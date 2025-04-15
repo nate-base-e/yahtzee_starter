@@ -51,3 +51,9 @@ class Checkbox:
             pygame.draw.rect(screen, (45, 45, 45), self.rect)
         label_surface = self.font.render(self.label, True, (0, 0, 0))
         screen.blit(label_surface, (self.rect.right + 10, self.rect.top))
+
+    def handle_event(self, event):
+        keyList = [pygame.K_a, pygame.K_s, pygame.K_d, pygame.K_f, pygame.K_g]
+        if event.type == pygame.KEYDOWN:
+            if event.key == keyList[self.diceNum]:
+                self.checked = not self.checked
