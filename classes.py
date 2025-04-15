@@ -4,7 +4,7 @@ import random
 
 class Dice:
     def __init__(self, x):
-        self.x = x
+        self._x = x
         self._showingFace = 1
         self._rect = pygame.Rect(58, 88, 184, 184)
 
@@ -32,9 +32,9 @@ class Dice:
             rollNumber = random.randrange(6)
             xVal = 227 * (rollNumber) + 58
             rect = pygame.Rect(xVal, 88, 184, 184)
-            screen.blit(pygame.image.load("images/dice.jpg"), (self.x, 20), rect)
+            screen.blit(pygame.image.load("images/dice.png"), (self._x, 20), rect)
         else:
-            screen.blit(pygame.image.load("images/dice.jpg"), (self.x, 20), self._rect)
+            screen.blit(pygame.image.load("images/dice.png"), (self._x, 20), self._rect)
 
 class Checkbox:
     def __init__(self, x, y, width, height, label, diceNum, checked=False):
