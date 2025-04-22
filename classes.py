@@ -121,3 +121,43 @@ class Checkbox:
         if event.type == pygame.KEYDOWN:
             if event.key == keyList[self.diceNum]:
                 self.checked = not self.checked
+
+class PointsCheckbox:
+    def __init__(self, x, y, width, height, label, highlighted=False, checked=False):
+        self.rect = pygame.Rect(x+2, y+2, width-4, height-4)
+        self.outer_rect = pygame.Rect(x, y, width, height)
+        self.highlight_rect = pygame.Rect(x-6, y-6, 204, 50)
+        self.label = label
+        self.font = pygame.font.SysFont(None, 32)
+        self.highlighted = highlighted
+        self.used = False
+
+    def draw(self, screen):
+        if self.highlighted:
+            pygame.draw.rect(screen,(200,200,200), self.highlight_rect)
+        pygame.draw.rect(screen, (0, 0, 0), self.outer_rect, 2)
+        if self.used:
+            pygame.draw.rect(screen, (45, 45, 45), self.rect)
+        label_surface = self.font.render(self.label, True, (0, 0, 0))
+        screen.blit(label_surface, (self.rect.right + 10, self.rect.top))
+
+    def handle_event(self, event):
+        keyList = [pygame.K_a, pygame.K_s, pygame.K_d, pygame.K_f, pygame.K_g]
+        if event.type == pygame.KEYDOWN:
+            if event.key == keyList[self.diceNum]:
+                self.checked = not self.checked
+
+class Text:
+    def __init__(self, text, xloc, yloc, size, color):
+        self.text = text
+        self.xloc = xloc
+        self.yloc = yloc
+        self.size = size
+        self.color = color
+        self.font = pygame.font.Font('freesansbold.ttf', size)
+
+    def draw(self, surface):
+        text = self.font.render(self.text, True, self.color)
+        textRect = text.get_rect()
+        textRect.center = (self.xloc // 2, self.yloc // 2)
+        surface.blit(text, textRect)
